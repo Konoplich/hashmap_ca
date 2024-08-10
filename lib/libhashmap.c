@@ -34,7 +34,23 @@ h(k) = ⌊m(kA mod 1)⌋,
     ⌊ ⌋ округляет значение;
     A — произвольная константа, значение которой должно находиться между 0 и 1. Оптимальный вариант ≈ (√5-1) / 2, его предложил Дональд Кнут.
 
+
 */
+unsigned long long HASHFUNC2 (size_t size, KEY key)
+{
+	unsigned long long hash = 5381;
+	unsigned int i = 0;
+	uchar *keysrc = key;
+
+	while (*key)
+	{
+		hash = ((hash << 5) + hash) ^ *key;
+	}
+
+	printf ("hash(%s)=%d\n", keysrc, hash);  /* отладка */
+	return hash;
+}
+
 int HASHFUNC (size_t size, KEY key)
 {
 	unsigned int i = 0;
